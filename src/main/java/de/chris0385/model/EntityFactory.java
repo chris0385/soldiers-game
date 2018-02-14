@@ -9,6 +9,6 @@ public class EntityFactory {
 	EntitySystemManager manager;
 	
 	public Entity createSoldier() {
-		new Enity
+		return manager.createEntity("blub");
 	}
 }
