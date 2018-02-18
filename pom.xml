@@ -20,14 +20,14 @@
 
 	<dependencyManagement>
 		<dependencies>
-			<!-- <dependency> -->
-			<!-- <groupId>org.eclipse.jetty.websocket</groupId> -->
-			<!-- <artifactId>websocket-client</artifactId> -->
-			<!-- <version>9.2.9.v20150224</version> -->
-			<!-- </dependency> -->
 			<dependency>
 				<groupId>org.eclipse.jetty.websocket</groupId>
 				<artifactId>websocket-server</artifactId>
+				<version>${jetty.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.eclipse.jetty.websocket</groupId>
+				<artifactId>websocket-client</artifactId>
 				<version>${jetty.version}</version>
 			</dependency>
 
@@ -94,6 +94,7 @@
 		<module>soldiers-api</module>
 		<module>soldiers-core</module>
 		<module>soldiers-web</module>
+		<module>soldiers-tinyia</module>
 	</modules>
 </project>
 
