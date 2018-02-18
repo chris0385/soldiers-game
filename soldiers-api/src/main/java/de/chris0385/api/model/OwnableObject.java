@@ -4,7 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import de.chris0385.utils.ObjectRegistry;
-
+/**
+ * Note: doesn't include type-infos.
+ *  Only subclasses can be used.
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 abstract class OwnableObject {
 	

@@ -1,4 +1,4 @@
-package de.chris0385;
+package de.chris0385.example;
 import java.net.URI;
 
 import org.eclipse.jetty.websocket.client.ClientUpgradeRequest;

@@ -1,4 +1,4 @@
-package de.chris0385;
+package de.chris0385.example;
 
 import java.io.IOException;
 
@@ -10,7 +10,6 @@ import org.eclipse.jetty.websocket.api.annotations.WebSocket;
 
 @WebSocket
 public class ToUpperWebSocket {
-
 	@OnWebSocketMessage
 	public void onText(Session session, String message) throws IOException {
 		System.out.println("Message received:" + message + " thread: " + Thread.currentThread());

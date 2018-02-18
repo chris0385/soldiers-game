@@ -1,4 +1,4 @@
-package de.chris0385;
+package de.chris0385.example;
 import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
 
