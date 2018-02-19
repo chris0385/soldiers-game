@@ -20,6 +20,7 @@
 
 	<dependencyManagement>
 		<dependencies>
+			<!-- Server -->
 			<dependency>
 				<groupId>org.eclipse.jetty.websocket</groupId>
 				<artifactId>websocket-server</artifactId>
@@ -31,10 +32,44 @@
 				<version>${jetty.version}</version>
 			</dependency>
 
+			<!-- libs -->
 			<dependency>
 				<groupId>commons-io</groupId>
 				<artifactId>commons-io</artifactId>
 				<version>2.5</version>
+			</dependency>
+			
+			<!-- GDX Game framework -->
+			<dependency>
+				<!-- Entity -->
+				<groupId>com.badlogicgames.ashley</groupId>
+				<artifactId>ashley</artifactId>
+				<version>1.7.3</version>
+			</dependency>
+			<dependency>
+				<!-- Physix -->
+				<groupId>com.badlogicgames.gdx</groupId>
+				<artifactId>gdx-bullet</artifactId>
+				<version>1.9.8</version>
+			</dependency>
+			<dependency>
+				<!-- core -->
+				<groupId>com.badlogicgames.gdx</groupId>
+				<artifactId>gdx</artifactId>
+				<version>1.9.8</version>
+			</dependency>
+			<dependency>
+				<!-- desktop -->
+				<groupId>com.badlogicgames.gdx</groupId>
+				<artifactId>gdx-platform</artifactId>
+				<classifier>natives-desktop</classifier>
+				<version>1.9.8</version>
+			</dependency>
+			<dependency>
+				<!-- Application -->
+				<groupId>com.badlogicgames.gdx</groupId>
+				<artifactId>gdx-backend-lwjgl</artifactId>
+				<version>1.9.8</version>
 			</dependency>
 			
 			<!-- JSON -->
