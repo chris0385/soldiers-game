@@ -18,7 +18,7 @@ public interface Client {
 	
 	/**
 	 * 
-	 * TODO: push to client?
+	 * TODO: push to client in a fixed interval automatically?
 	 */
 	World getWorld();
 }
