@@ -4,15 +4,14 @@ import java.net.URI;
 
 import org.eclipse.jetty.websocket.client.ClientUpgradeRequest;
 import org.eclipse.jetty.websocket.client.WebSocketClient;
-import org.junit.Test;
 
 import de.chris0385.api.commands.MoveCommand;
 import de.chris0385.api.model.Id;
 
 public class SoldierClient {
 
-	@Test
-	public void test() throws Exception {
+	
+	public static void main(String[] args) throws Exception {
 		String dest = "ws://localhost:8080/soldier";
 		WebSocketClient client = new WebSocketClient();
 		try {

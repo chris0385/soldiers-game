@@ -20,6 +20,9 @@ abstract class OwnableObject {
 	
 	// What about the size? Rectangle?
 	private Position position;
+	/**
+	 * Use joml  vectors
+	 */
 	private Object orientation;
 	
 //	List<Components> l;

@@ -39,6 +39,15 @@
 				<version>2.5</version>
 			</dependency>
 			
+			
+			<!-- Opengl -->
+			<dependency>
+    <groupId>org.joml</groupId>
+    <artifactId>joml</artifactId>
+    <version>1.9.8</version>
+</dependency>
+			
+			
 			<!-- GDX Game framework -->
 			<dependency>
 				<!-- Entity -->

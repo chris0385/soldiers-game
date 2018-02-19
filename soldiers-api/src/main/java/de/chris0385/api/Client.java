@@ -16,5 +16,9 @@ public interface Client {
 
 	void sendCommands(List<Command> commands);
 	
+	/**
+	 * 
+	 * TODO: push to client?
+	 */
 	World getWorld();
 }
