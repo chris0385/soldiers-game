@@ -11,7 +11,8 @@
 	<!-- run server using mvn jetty:run -->
 
 	<properties>
-		<jetty.version>9.4.8.v20171121</jetty.version>
+<!-- 	<jetty.version>9.4.8.v20171121</jetty.version> -->
+		<jetty.version>9.4.6.v20170531</jetty.version>
 		<jackson.version>2.9.4</jackson.version>
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -14,6 +14,9 @@ public interface Client {
 	void register(String name, String password);
 	void login(String name, String password, String tag);
 
+	/**
+	 * TODO: multi commands for same Unit (command chaining / parallel shooting + moving)
+	 */
 	void sendCommands(List<Command> commands);
 	
 	/**

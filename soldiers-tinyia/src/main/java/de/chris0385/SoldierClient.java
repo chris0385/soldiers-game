@@ -1,6 +1,8 @@
 package de.chris0385;
 
+import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
 
 import org.eclipse.jetty.websocket.client.ClientUpgradeRequest;
 import org.eclipse.jetty.websocket.client.WebSocketClient;
@@ -12,18 +14,14 @@ public class SoldierClient {
 
 	
 	public static void main(String[] args) throws Exception {
-		String dest = "ws://localhost:8080/soldier";
 		WebSocketClient client = new WebSocketClient();
 		try {
 			
-			SoldierClientSocket socket = new SoldierClientSocket();
-			client.start();
-			URI echoUri = new URI(dest);
-			ClientUpgradeRequest request = new ClientUpgradeRequest();
-			client.connect(socket, echoUri, request);
-			socket.getLatch().await();
+			SoldierClientSocket socket = buildSocket(client);
+			
 			socket.sendObject(new MoveCommand(new Id("foo"), null));
 			socket.sendObject(new MoveCommand(new Id("bar"), null));
+			
 			Thread.sleep(10000l);
 
 		} finally {
@@ -33,5 +31,17 @@ public class SoldierClient {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	private static SoldierClientSocket buildSocket(WebSocketClient client)
+			throws Exception, URISyntaxException, IOException, InterruptedException {
+		String dest = "ws://localhost:8080/soldier";
+		SoldierClientSocket socket = new SoldierClientSocket();
+		client.start();
+		URI echoUri = new URI(dest);
+		ClientUpgradeRequest request = new ClientUpgradeRequest();
+		client.connect(socket, echoUri, request);
+		socket.getLatch().await();
+		return socket;
 	}
 }
