@@ -11,6 +11,7 @@ import de.chris0385.api.model.Id;
 @JsonSubTypes({ //
 		@JsonSubTypes.Type(value = BuildCommand.class, name = "BUILD"), //
 		@JsonSubTypes.Type(value = MoveCommand.class, name = "MOVE"),//
+		@JsonSubTypes.Type(value = ShootCommand.class, name = "SHOOT"),//
 })
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public abstract class Command {

@@ -11,6 +11,9 @@ public class World {
 
 	private List<Unit> units;
 	private List<Structure> structures;
+	
+	// TODO: bullets+grenades... to permit dodging
+	private List<Object> bullets;
 
 	// ** Metadata **
 	private List<ObjectType> types;
@@ -18,6 +21,11 @@ public class World {
 	
 	//  TODO
 	private List<Command> activeCommands;
+	
+	/**
+	 * Errors, warnings, messages from admin,...
+	 */
+	private List<Object> messages;
 
 	private void readObject(ObjectInputStream aInputStream) throws ClassNotFoundException, IOException {
 		aInputStream.defaultReadObject();
