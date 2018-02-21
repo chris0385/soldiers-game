@@ -39,6 +39,13 @@
 			<artifactId>gdx-backend-lwjgl</artifactId>
 		</dependency>
 		
+		<!-- Another Entity-Component-System -->
+		<dependency>
+		    <groupId>net.onedaybeard.artemis</groupId>
+		    <artifactId>artemis-odb</artifactId>
+		    <version>2.1.0</version>
+		</dependency>
+		
 	
 	</dependencies>
 </project>
