@@ -32,14 +32,15 @@ public class Entity
 	{
 		Class<? extends Component> newComponentType = newComponent.getClass();
 		
+		// TODO Frage: macht es überaupt Sinn mehrere Componenten des gleichen typs zu haben? Man hkann danach eh nicht drauf zugreifen. 
 		boolean alreadyHasComponentOfSameType = componentTypes.contains(newComponentType);
-		if (alreadyHasComponentOfSameType) {
+		if (!alreadyHasComponentOfSameType) {
 			componentTypes.add(newComponentType);
 		}
 		
 		components.add(newComponent);
 		
-		if (alreadyHasComponentOfSameType) {
+		if (!alreadyHasComponentOfSameType) {
 			entitySystemManager.addEntityToAllMatchingEntitySystems(this);
 		}
 		
