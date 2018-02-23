@@ -26,8 +26,11 @@ public class World {
 	 * Errors, warnings, messages from admin,...
 	 */
 	private List<Object> messages;
+	
+	private TileMap tiles;
 
 	private void readObject(ObjectInputStream aInputStream) throws ClassNotFoundException, IOException {
+		// FIXME: this doesn't work for JSON
 		aInputStream.defaultReadObject();
 		types.forEach(ObjectRegistry.INSTANCE::registerType);
 		players.forEach(ObjectRegistry.INSTANCE::registerPlayer);

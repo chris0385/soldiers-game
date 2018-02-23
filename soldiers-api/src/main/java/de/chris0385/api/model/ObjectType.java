@@ -4,6 +4,7 @@ import java.util.List;
 
 /**
  * Both units and structures.
+ * TODO: What about Flags?
  */
 public final class ObjectType {
 	
@@ -24,7 +25,13 @@ public final class ObjectType {
 	private boolean canBeConquered;
 	
 	/**
-	 * List of names. Can be null.
+	 * Set in the case of units.
+	 * null for structures.
+	 */
+	private Boolean isAmphibious;
+	
+	/**
+	 * List of names. Can be null (for units and maybe some buildings).
 	 */
 	private List<String> objectsThatCanBeBuild;
 }

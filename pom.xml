@@ -55,31 +55,6 @@
 				<artifactId>ashley</artifactId>
 				<version>1.7.3</version>
 			</dependency>
-			<dependency>
-				<!-- Physix -->
-				<groupId>com.badlogicgames.gdx</groupId>
-				<artifactId>gdx-bullet</artifactId>
-				<version>1.9.8</version>
-			</dependency>
-			<dependency>
-				<!-- core -->
-				<groupId>com.badlogicgames.gdx</groupId>
-				<artifactId>gdx</artifactId>
-				<version>1.9.8</version>
-			</dependency>
-			<dependency>
-				<!-- desktop -->
-				<groupId>com.badlogicgames.gdx</groupId>
-				<artifactId>gdx-platform</artifactId>
-				<classifier>natives-desktop</classifier>
-				<version>1.9.8</version>
-			</dependency>
-			<dependency>
-				<!-- Application -->
-				<groupId>com.badlogicgames.gdx</groupId>
-				<artifactId>gdx-backend-lwjgl</artifactId>
-				<version>1.9.8</version>
-			</dependency>
 			
 			<!-- JSON -->
 			<dependency>
@@ -96,6 +71,25 @@
 				<groupId>com.fasterxml.jackson.core</groupId>
 				<artifactId>jackson-annotations</artifactId>
 				<version>${jackson.version}</version>
+			</dependency>
+			
+			<!-- logging -->
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>1.7.2</version>
+			</dependency>
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-core</artifactId>
+				<version>1.0.0</version>
+				<scope>runtime</scope>
+			</dependency>
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>1.0.0</version>
+				<scope>runtime</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

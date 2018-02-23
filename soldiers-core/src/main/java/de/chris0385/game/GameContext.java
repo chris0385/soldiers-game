@@ -1,4 +1,4 @@
-package de.chris0385;
+package de.chris0385.game;
 
 import de.chris0385.components.EntityFactory;
 import de.slyh.toolkit.entitysystem.EntitySystemManager;

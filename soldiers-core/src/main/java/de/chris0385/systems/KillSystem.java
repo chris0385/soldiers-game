@@ -1,9 +1,9 @@
 package de.chris0385.systems;
 
 
-import de.chris0385.GameContext;
 import de.chris0385.components.ControllableComponent;
 import de.chris0385.components.HealthComponent;
+import de.chris0385.game.GameContext;
 import de.slyh.toolkit.entitysystem.Entity;
 import de.slyh.toolkit.entitysystem.EntitySystem;
 

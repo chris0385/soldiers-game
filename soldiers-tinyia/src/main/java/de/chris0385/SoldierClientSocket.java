@@ -17,7 +17,6 @@ public class SoldierClientSocket {
 	private Session session;
 	private ObjectMapper mapper = new ObjectMapper();
 
-	CountDownLatch latch = new CountDownLatch(1);
 
 	@OnWebSocketMessage
 	public void onText(Session session, String message) throws IOException {
@@ -28,7 +27,6 @@ public class SoldierClientSocket {
 	public void onConnect(Session session) {
 		System.out.println("Connected to server");
 		this.session = session;
-		latch.countDown();
 	}
 
 	private void sendMessage(String str) {
@@ -46,10 +44,6 @@ public class SoldierClientSocket {
 		} catch (JsonProcessingException e) {
 			throw new RuntimeException(e);
 		}
-	}
-
-	public CountDownLatch getLatch() {
-		return latch;
 	}
 
 }

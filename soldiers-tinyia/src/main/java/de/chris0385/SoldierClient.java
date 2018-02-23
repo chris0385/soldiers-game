@@ -6,6 +6,7 @@ import java.net.URISyntaxException;
 
 import org.eclipse.jetty.websocket.client.ClientUpgradeRequest;
 import org.eclipse.jetty.websocket.client.WebSocketClient;
+import org.eclipse.jetty.websocket.common.extensions.compress.PerMessageDeflateExtension;
 
 import de.chris0385.api.commands.MoveCommand;
 import de.chris0385.api.model.Id;
@@ -15,6 +16,7 @@ public class SoldierClient {
 	
 	public static void main(String[] args) throws Exception {
 		WebSocketClient client = new WebSocketClient();
+//		client.getExtensionFactory().register("permessage-deflate", PerMessageDeflateExtension.class);
 		try {
 			
 			SoldierClientSocket socket = buildSocket(client);
@@ -35,13 +37,14 @@ public class SoldierClient {
 
 	private static SoldierClientSocket buildSocket(WebSocketClient client)
 			throws Exception, URISyntaxException, IOException, InterruptedException {
+		client.start();
 		String dest = "ws://localhost:8080/soldier";
 		SoldierClientSocket socket = new SoldierClientSocket();
-		client.start();
 		URI echoUri = new URI(dest);
 		ClientUpgradeRequest request = new ClientUpgradeRequest();
-		client.connect(socket, echoUri, request);
-		socket.getLatch().await();
+		request.addExtensions("permessage-deflate");
+		client.connect(socket, echoUri, request).get();
+//		socket.getLatch().await();
 		return socket;
 	}
 }
