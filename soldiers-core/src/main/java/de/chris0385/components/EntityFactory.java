@@ -20,8 +20,8 @@ public class EntityFactory {
 		// TODO: unique id
 		Entity entity = manager.createEntity("soldier");
 		entity.addComponent(new HealthComponent(100));
-		entity.addComponent(new MovingComponent());
-		entity.addComponent(new PositionedComponent());
+		entity.addComponent(new PhysicsComponent());
+		entity.addComponent(new LocationComponent());
 		entity.addComponent(new ShootingComponent());
 		return entity;
 	}
