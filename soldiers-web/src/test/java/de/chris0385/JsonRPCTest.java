@@ -12,7 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import de.chris0385.JsonRPC.CallResponse;
-import de.chris0385.api.model.Player;
+import de.chris0385.api.model.meta.Player;
 
 public class JsonRPCTest {
 	

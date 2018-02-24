@@ -1,6 +1,8 @@
 package de.chris0385.game;
 
+import de.chris0385.api.model.Id;
 import de.chris0385.components.EntityFactory;
+import de.slyh.toolkit.entitysystem.Entity;
 import de.slyh.toolkit.entitysystem.EntitySystemManager;
 
 /**
@@ -17,5 +19,9 @@ public class GameContext {
 	 */
 	public float gameTime() {
 		return gameTime;
+	}
+	
+	public Entity getEntity(Id id) {
+		return entitySystemManager.getEntity(id.getId());
 	}
 }

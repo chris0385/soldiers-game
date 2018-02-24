@@ -3,6 +3,7 @@ package de.chris0385;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Arrays;
 
 import org.eclipse.jetty.websocket.client.ClientUpgradeRequest;
 import org.eclipse.jetty.websocket.client.WebSocketClient;
@@ -20,10 +21,11 @@ public class SoldierClient {
 		try {
 			
 			SoldierClientSocket socket = buildSocket(client);
-			
-			socket.sendObject(new MoveCommand(new Id("foo"), null));
-			socket.sendObject(new MoveCommand(new Id("bar"), null));
-			
+
+			socket.sendCommands(Arrays.asList(new MoveCommand(new Id("foo"), null)));
+			socket.sendCommands(Arrays.asList(new MoveCommand(new Id("bar"), null)));
+//			socket.sendObject(new MoveCommand(new Id("bar"), null));
+
 			Thread.sleep(10000l);
 
 		} finally {

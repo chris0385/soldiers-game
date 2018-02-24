@@ -3,6 +3,8 @@ package de.chris0385.api.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+import de.chris0385.api.model.meta.ObjectType;
+import de.chris0385.api.model.meta.Player;
 import de.chris0385.utils.ObjectRegistry;
 /**
  * Note: doesn't include type-infos.

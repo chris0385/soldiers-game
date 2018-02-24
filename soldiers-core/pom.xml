@@ -28,6 +28,13 @@
 		    <version>2.1.0</version>
 		</dependency>
 		
+		<!-- Tiled map -->
+		<dependency>
+		    <groupId>org.mapeditor</groupId>
+		    <artifactId>libtiled</artifactId>
+		    <version>0.17</version>
+		</dependency>
+		
 		<!-- logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>

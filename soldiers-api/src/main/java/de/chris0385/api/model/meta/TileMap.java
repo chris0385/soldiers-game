@@ -1,4 +1,4 @@
-package de.chris0385.api.model;
+package de.chris0385.api.model.meta;
 
 import java.util.List;
 

@@ -7,6 +7,6 @@ public class Lobby {
 
 	public Client createClient() {
 		// TODO
-		return null;
+		return new Client();
 	}
 }

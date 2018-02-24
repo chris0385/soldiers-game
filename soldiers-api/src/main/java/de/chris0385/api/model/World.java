@@ -5,6 +5,11 @@ import java.io.ObjectInputStream;
 import java.util.List;
 
 import de.chris0385.api.commands.Command;
+import de.chris0385.api.model.meta.ObjectType;
+import de.chris0385.api.model.meta.Player;
+import de.chris0385.api.model.meta.StructureType;
+import de.chris0385.api.model.meta.TileMap;
+import de.chris0385.api.model.meta.UnitType;
 import de.chris0385.utils.ObjectRegistry;
 
 public class World {
@@ -16,8 +21,11 @@ public class World {
 	private List<Object> bullets;
 
 	// ** Metadata **
-	private List<ObjectType> types;
+	private List<UnitType> unitTypes;
+	private List<StructureType> structureTypes;
 	private List<Player> players;
+	private List<Sector> sectors;
+	private TileMap tiles;
 	
 	//  TODO
 	private List<Command> activeCommands;
@@ -27,12 +35,11 @@ public class World {
 	 */
 	private List<Object> messages;
 	
-	private TileMap tiles;
-
 	private void readObject(ObjectInputStream aInputStream) throws ClassNotFoundException, IOException {
 		// FIXME: this doesn't work for JSON
 		aInputStream.defaultReadObject();
-		types.forEach(ObjectRegistry.INSTANCE::registerType);
+		unitTypes.forEach(ObjectRegistry.INSTANCE::registerType);
+		structureTypes.forEach(ObjectRegistry.INSTANCE::registerType);
 		players.forEach(ObjectRegistry.INSTANCE::registerPlayer);
 	}
 }

@@ -4,8 +4,8 @@ import de.chris0385.api.model.Id;
 import de.chris0385.api.model.Position;
 import de.chris0385.api.model.Unit;
 
-public final class ShootCommand extends Command {
-
+public final class ShootCommand extends CommandOnObject {
+	public static final String ID = "SHOOT";
 
 	public ShootCommand(Id objectId, Position targetPosition) {
 		super(objectId);
@@ -19,6 +19,11 @@ public final class ShootCommand extends Command {
 		this.targetUnit = target;
 	}
 
+	@Override
+	public String getCommandName() {
+		return ID;
+	}
+	
 	private final Unit targetUnit;
 	private final Position targetPosition;
 	

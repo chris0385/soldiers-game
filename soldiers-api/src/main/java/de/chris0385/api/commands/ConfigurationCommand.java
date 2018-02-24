@@ -7,7 +7,13 @@ import java.util.Map;
  * TODO: discuss
  */
 public final class ConfigurationCommand extends Command {
+	public static final String ID = "CONFIG";
 
+	@Override
+	public String getCommandName() {
+		return ID;
+	}
+	
 	public enum ConfKey {
 		/**
 		 * Configure if the server should send players in the World (Doesn't change)
@@ -25,8 +31,6 @@ public final class ConfigurationCommand extends Command {
 		 * Don't want to play, just look.
 		 */
 		SET_OBSERVER_MODE,
-	}
-	public ConfigurationCommand() {
 	}
 
 	private Map<ConfKey, Object> conf;

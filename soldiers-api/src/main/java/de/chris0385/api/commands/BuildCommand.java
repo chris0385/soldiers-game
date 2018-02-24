@@ -1,8 +1,22 @@
 package de.chris0385.api.commands;
 
-import de.chris0385.api.model.ObjectType;
+import de.chris0385.api.model.Id;
 
-public final class BuildCommand extends Command {
+public final class BuildCommand extends CommandOnObject {
+	public static final String ID = "BUILD";
 
-	private ObjectType typeToBuild;
+	private BuildCommand() {
+		// Default for deserialisation
+	}
+	
+	protected BuildCommand(Id objectId) {
+		super(objectId);
+	}
+	
+	@Override
+	public String getCommandName() {
+		return ID;
+	}
+
+	private String typeToBuild;
 }

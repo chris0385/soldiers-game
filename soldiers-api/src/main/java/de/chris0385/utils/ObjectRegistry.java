@@ -1,8 +1,8 @@
 package de.chris0385.utils;
 
 import de.chris0385.api.model.Id;
-import de.chris0385.api.model.ObjectType;
-import de.chris0385.api.model.Player;
+import de.chris0385.api.model.meta.ObjectType;
+import de.chris0385.api.model.meta.Player;
 
 public final class ObjectRegistry {
 	
