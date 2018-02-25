@@ -24,7 +24,7 @@ import de.chris0385.api.commands.Command;
 import de.chris0385.api.messages.Message;
 import de.chris0385.api.messages.WorldUpdateMessage;
 import de.chris0385.api.model.World;
-import de.chris0385.components.EntityFactory;
+import de.chris0385.game.EntityFactory;
 import de.chris0385.lobby.Client;
 import de.chris0385.lobby.ClientUpdateListener;
 import de.chris0385.lobby.Lobby;

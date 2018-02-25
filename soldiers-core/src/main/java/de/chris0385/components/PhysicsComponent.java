@@ -1,6 +1,6 @@
 package de.chris0385.components;
 
-import de.slyh.toolkit.entitysystem.Component;
+import com.github.antag99.retinazer.Component;
 
 public class PhysicsComponent implements Component {
 	

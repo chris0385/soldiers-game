@@ -1,44 +1,24 @@
 package de.chris0385.systems;
 
 
-import de.chris0385.components.ControllableComponent;
+import com.github.antag99.retinazer.EntityProcessorSystem;
+import com.github.antag99.retinazer.FamilyConfig;
+
 import de.chris0385.components.HealthComponent;
-import de.chris0385.game.GameContext;
-import de.slyh.toolkit.entitysystem.Entity;
-import de.slyh.toolkit.entitysystem.EntitySystem;
 
-public class KillSystem extends EntitySystem {
+public class KillSystem extends EntityProcessorSystem {
 
-	private GameContext ctx;
-
-	public KillSystem(GameContext ctx) {
-		super("KillSystem", HealthComponent.class);
-		this.ctx = ctx;
-		ctx.entitySystemManager.registerSystem(this);
+	public KillSystem() {
+		super(new FamilyConfig().with(HealthComponent.class));
 	}
 
-
 	@Override
-	protected void prepareUpdate(float tpf) {
+	protected void process(int entity) {
 		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	protected void update(Entity entity, float tpf) {
-		HealthComponent hc = entity.getComponent(HealthComponent.class);
+		HealthComponent hc = engine.getMapper(HealthComponent.class).get(entity);
 		if (hc.health <= 0) {
-			// TODO: Death event
-			//entity.getId()
-			//entity.getOptionalComponent(ControllableComponent.class).player;
-			entity.dispose();
-//			entity.addComponent(new DeadBody());
+			engine.destroyEntity(entity);
 		}
 	}
 
-	@Override
-	protected void dispose() {
-		// TODO Auto-generated method stub
-		
-	}
 }

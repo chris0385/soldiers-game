@@ -19,10 +19,12 @@ public class Game implements Runnable {
 	private List<GamePlayer> players;
 	private GameContext ctx;
 	private LastNonNull<List<Command>> commandRetriever;
+	private CommandValidator commandValidator;
 
 	
 	public Game(GameContext ctx) {
 		this.ctx = ctx;
+		commandValidator = new CommandValidator(ctx);
 	}
 	
 	@Override
@@ -58,12 +60,32 @@ public class Game implements Runnable {
 
 	private void step() {
 		
+		retrieveAndDispatchCommands();
+		
 		// TODO wait (limited time) for incoming commands
 		// TODO calculate changes
 		
 		// TODO: retrieve late commands before sending update to client (avoid confusion between old commands and new ones)
 		// TODO send update to clients
 		
+	}
+
+	private void retrieveAndDispatchCommands() {
+		List<List<Command>> commands = waitForCommands(100); // TODO: configurable Timeout
+		
+		for (int i = 0; i < commands.size(); i++) {
+			List<Command> commandList = commands.get(i);
+			// TODO: if commandList is null, use those of preceding round?
+			GamePlayer player = players.get(i);
+			if (commandList != null) {
+				for (Command command : commandList) {
+					String error = commandValidator.isInvalid(player, command);
+					if (error != null) {
+						// FIXME
+					}
+				}
+			}
+		}
 	}
 
 }

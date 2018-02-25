@@ -8,6 +8,17 @@
 	</parent>
 	<artifactId>soldiers-core</artifactId>
 
+	<repositories>
+		<repository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>bintray-antag99-maven</id>
+			<name>bintray</name>
+			<url>http://dl.bintray.com/antag99/maven</url>
+		</repository>
+	</repositories>
+	
 	<dependencies>
 		<dependency>
 			<groupId>de.chris0385</groupId>
@@ -16,17 +27,21 @@
 		</dependency>
 		
 		<!-- Entity-Component-System -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>com.badlogicgames.ashley</groupId> -->
+<!-- 			<artifactId>ashley</artifactId> -->
+<!-- 		</dependency> -->
 		<dependency>
-			<groupId>com.badlogicgames.ashley</groupId>
-			<artifactId>ashley</artifactId>
+			<groupId>com.github.antag99.retinazer</groupId>
+			<artifactId>retinazer</artifactId>
+			<version>0.3.0</version>
 		</dependency>
-	
 		<!-- Another Entity-Component-System -->
-		<dependency>
-		    <groupId>net.onedaybeard.artemis</groupId>
-		    <artifactId>artemis-odb</artifactId>
-		    <version>2.1.0</version>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 		    <groupId>net.onedaybeard.artemis</groupId> -->
+<!-- 		    <artifactId>artemis-odb</artifactId> -->
+<!-- 		    <version>2.1.0</version> -->
+<!-- 		</dependency> -->
 		
 		<!-- Tiled map -->
 		<dependency>

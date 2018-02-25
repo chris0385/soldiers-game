@@ -1,15 +1,11 @@
 package de.chris0385.components;
 
-import de.slyh.toolkit.entitysystem.Component;
+import com.github.antag99.retinazer.Component;
 
 public class HealthComponent implements Component {
 
-	public final int maxHealth;
+	public int maxHealth;
 
 	public int health;
-
-	public HealthComponent(int maxHealth) {
-		this.maxHealth = maxHealth;
-	}
 
 }
