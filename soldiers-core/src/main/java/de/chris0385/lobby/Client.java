@@ -1,8 +1,16 @@
 package de.chris0385.lobby;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import de.chris0385.api.commands.Command;
+import de.chris0385.api.model.World;
+import de.chris0385.game.Game;
 
 /**
  * A client represents a connection to the client.
@@ -11,8 +19,10 @@ import de.chris0385.api.commands.Command;
  * A single person may also have multiple open connections open with the server.
  */
 public class Client {
+	private static final Logger LOG = LoggerFactory.getLogger(Client.class);
 
 	private List<Command> commands;
+	private List<ClientUpdateListener> clientUpdateListeners= new ArrayList<>();
 	
 	public void dispose() {
 		// TODO Auto-generated method stub
@@ -20,7 +30,7 @@ public class Client {
 	}
 	
 	public void addClientUpdateListener(ClientUpdateListener listener) {
-		// TODO
+		clientUpdateListeners.add(listener);
 	}
 
 	/**
@@ -56,6 +66,22 @@ public class Client {
 		List<Command> result = commands;
 		commands = null;
 		return result;
+	}
+
+	public void sendWorld(World world) {
+		for (int i = 0; i < clientUpdateListeners.size(); i++) {
+			ClientUpdateListener listener = clientUpdateListeners.get(i);
+			Future<Boolean> future = listener.worldUpdate(world);
+			
+			try {
+				future.get(); // TODO: parallel async
+			} catch (InterruptedException e) {
+				Thread.currentThread().interrupt();
+				return; 
+			} catch (ExecutionException e) {
+				LOG.info(e.getMessage(), e);
+			} 
+		}
 	}
 	
 

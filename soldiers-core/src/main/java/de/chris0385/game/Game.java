@@ -4,10 +4,16 @@ import java.util.List;
 import java.util.function.IntFunction;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import de.chris0385.api.commands.Command;
+import de.chris0385.api.model.World;
 import de.chris0385.utils.LastNonNull;
 
 public class Game implements Runnable {
+	
+	private static final Logger LOG = LoggerFactory.getLogger(Game.class);
 
 	private boolean running;
 	private List<GamePlayer> players;
@@ -41,6 +47,13 @@ public class Game implements Runnable {
 
 	private List<List<Command>> waitForCommands(int timeout) {
 		return commandRetriever.get(timeout);
+	}
+	
+	private void sendWorldUpdate(World world) {
+		for (int i = 0; i < players.size(); i++) {
+			GamePlayer player = players.get(i);
+			player.getClient().sendWorld(world);
+		}
 	}
 
 	private void step() {

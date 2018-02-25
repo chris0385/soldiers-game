@@ -9,10 +9,15 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class JsonRPC {
+	
+	private static final Logger LOG = LoggerFactory.getLogger(JsonRPC.class);
 
 	private static final ObjectMapper MAPPER = new ObjectMapper();
 	private final Object target;
@@ -151,7 +156,7 @@ public class JsonRPC {
 			Object result = method.invoke(target, methodCall.getParam().toArray());
 			return new CallResponse(callId, result, null);
 		} catch (IllegalAccessException | IllegalArgumentException e) {
-			e.printStackTrace();// TODO
+			LOG.debug(e.getMessage(), e);
 			return new CallResponse(callId, null, e.getMessage());
 		} catch (InvocationTargetException e) {
 			// TODO: log

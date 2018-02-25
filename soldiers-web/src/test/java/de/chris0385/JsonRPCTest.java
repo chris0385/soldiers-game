@@ -1,16 +1,17 @@
 package de.chris0385;
 
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
 import java.io.IOException;
-import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.LoggerFactory;
 
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
 import de.chris0385.JsonRPC.CallResponse;
 import de.chris0385.api.model.meta.Player;
 
@@ -22,7 +23,8 @@ public class JsonRPCTest {
 	@Before
 	public void setup() throws Exception {
 		rpc = new JsonRPC(this);
-		
+		Logger root = (Logger)LoggerFactory.getLogger(JsonRPC.class);
+		root.setLevel(Level.INFO);
 	}
 
 	@Test

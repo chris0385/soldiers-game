@@ -2,7 +2,9 @@ package de.chris0385;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Future;
 
 import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketClose;
@@ -13,11 +15,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import de.chris0385.api.commands.Command;
+import de.chris0385.api.messages.Message;
+import de.chris0385.api.messages.WorldUpdateMessage;
+import de.chris0385.api.model.World;
 import de.chris0385.components.EntityFactory;
 import de.chris0385.lobby.Client;
 import de.chris0385.lobby.ClientUpdateListener;
@@ -29,7 +35,7 @@ public class SoldierWebSocket {
 	private static final TypeReference<List<Command>> TYPE_LIST_OF_COMMAND = new TypeReference<List<Command>>() {
 	};
 
-	private static final Logger LOG = LoggerFactory.getLogger(EntityFactory.class);
+	private static final Logger LOG = LoggerFactory.getLogger(SoldierWebSocket.class);
 	
 	private ObjectMapper mapper = new ObjectMapper();
 	
@@ -46,12 +52,39 @@ public class SoldierWebSocket {
 			this.session = session;
 		}
 		
-		private void sendMessage(String message) throws IOException {
+		private void sendMessage(String message) {
 			/*
 			 * We could use a customized ObjectMapper to filter out what should be visible to each player.
 			 */
 			if (session.isOpen()) {
-				session.getRemote().sendString(message);
+				try {
+					session.getRemote().sendString(message);
+				} catch (IOException e) {
+					LOG.info("Exception while sending to client", e);
+				}
+			}
+		}
+
+		@Override
+		public Future<Boolean> worldUpdate(World world) {
+			WorldUpdateMessage message = new WorldUpdateMessage();
+			message.world = world;
+			return sendMessageAsync(message);
+		}
+
+		private CompletableFuture<Boolean> sendMessageAsync(WorldUpdateMessage message) {
+			return CompletableFuture.supplyAsync(() -> {
+				sendMessage(message);
+				return Boolean.TRUE;
+			});
+		}
+
+		private void sendMessage(Message message) {
+			try {
+				String json = mapper.writeValueAsString(message);
+				sendMessage(json);
+			} catch (JsonProcessingException e) {
+				LOG.warn("Exception while sending to client", e);
 			}
 		}
 	}
