@@ -4,7 +4,7 @@ public final class BuildingComponent extends ControllableComponent {
 	
 	// TODO: distinction, controlling build, controlling movement
 	
-	public int timeLeft;
+	public long timeWhenBuildDone;
 	public String typeBuilt;
 	
 }

@@ -1,14 +1,15 @@
 package de.chris0385.game;
 
+import java.util.function.IntConsumer;
+
 import com.github.antag99.retinazer.Engine;
 import com.github.antag99.retinazer.EngineConfig;
-import com.github.antag99.retinazer.EntityListener;
-import com.github.antag99.retinazer.EntitySet;
+import com.github.antag99.retinazer.FamilyConfig;
 import com.github.antag99.retinazer.Priority;
-import com.github.antag99.retinazer.util.IntBag;
 
 import de.chris0385.api.model.Id;
-import de.chris0385.components.ComponentFactory;
+import de.chris0385.components.LocationComponent;
+import de.chris0385.systems.BuildSystem;
 import de.chris0385.systems.KillSystem;
 
 /**
@@ -18,21 +19,26 @@ public class GameContext {
 
 	public final Engine engine;
 	public final EntityFactory entityFactory;
-	private float gameTime;
+	
+	public final SpatialIndex spatialIndex;
+	private long gameTime;
 	
 	
 	public GameContext() {
 		EngineConfig config = new EngineConfig();
 		config.addSystem(new KillSystem(), Priority.LOWER);
+		config.addSystem(new BuildSystem(this), Priority.DEFAULT);
 		engine = new Engine(config);
 		
 		entityFactory = new EntityFactory(engine);
+		
+		spatialIndex = new SpatialIndexImpl(engine);
 	}
 	
 	/**
-	 * Time since game started
+	 * Time since game started (millis)
 	 */
-	public float gameTime() {
+	public long gameTime() {
 		return gameTime;
 	}
 

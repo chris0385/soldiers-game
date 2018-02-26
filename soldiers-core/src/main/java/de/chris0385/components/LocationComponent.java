@@ -7,4 +7,5 @@ public class LocationComponent implements Component {
 	public float x;
 	public float y;
 
+	public float size;
 }
