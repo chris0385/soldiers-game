@@ -6,8 +6,8 @@ public final class RegisterCommand extends Command {
 	public static final String ID = "REGISTER";
 
 	@Override
-	public String getCommandName() {
-		return ID;
+	public CommandType getCommandName() {
+		return CommandType.REGISTER;
 	}
 	
 	@JsonProperty(required = true)

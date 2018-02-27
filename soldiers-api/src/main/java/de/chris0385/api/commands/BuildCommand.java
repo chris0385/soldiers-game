@@ -14,8 +14,8 @@ public final class BuildCommand extends CommandOnObject {
 	}
 	
 	@Override
-	public String getCommandName() {
-		return ID;
+	public CommandType getCommandName() {
+		return CommandType.BUILD;
 	}
 
 	private String typeToBuild;
