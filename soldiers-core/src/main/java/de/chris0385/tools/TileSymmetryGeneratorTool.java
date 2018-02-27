@@ -18,18 +18,18 @@ import tiled.core.TileSet;
 import tiled.io.TMXMapReader;
 import tiled.io.TMXMapWriter;
 
-public class TileSymmetry {
+public class TileSymmetryGeneratorTool {
 
 	private String source;
 	private String tmp;
 
-	public TileSymmetry(String source) {
+	public TileSymmetryGeneratorTool(String source) {
 		this.source = source;
 		this.tmp = new File(new File(source).getParentFile(), "symmetry-maker.tmp").getAbsolutePath();
 	}
 
 	public static void main(String[] args) throws Exception {
-		new TileSymmetry("/home/christophe/workspaces/workspace/soldiers-game/Tiles/symmetric.tmx").run();
+		new TileSymmetryGeneratorTool("/home/christophe/workspaces/workspace/soldiers-game/Tiles/symmetric.tmx").run();
 	}
 
 	private void run() throws Exception {

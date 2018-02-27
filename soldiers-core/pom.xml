@@ -26,6 +26,43 @@
 			<version>${project.version}</version>
 		</dependency>
 		
+		<!-- Physic -->
+<!-- 		<dependency> -->
+<!-- 		    <groupId>org.ode4j</groupId> -->
+<!-- 		    <artifactId>core</artifactId> -->
+<!-- 		    <version>0.3.1</version> -->
+<!-- 		    <scope>test</scope> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 		    <groupId>org.jbox2d</groupId> -->
+<!-- 		    <artifactId>jbox2d-library</artifactId> -->
+<!-- 		    <version>2.2.1.1</version> -->
+<!-- 		    <scope>test</scope> -->
+<!-- 		</dependency> -->
+		<dependency>
+			<groupId>org.joml</groupId>
+			<artifactId>joml</artifactId>
+		</dependency>
+		<!-- indexes -->
+		<dependency>
+			<!--  Unused for now -->
+		    <groupId>org.tinspin</groupId>
+		    <artifactId>tinspin-indexes</artifactId>
+		    <version>1.5.1</version>
+		</dependency>
+		
+<!-- 		<dependency> -->
+<!--     <groupId>org.apache.commons</groupId> -->
+<!--     <artifactId>commons-math3</artifactId> -->
+<!--     <version>3.6.1</version> -->
+<!-- </dependency> -->
+		
+<!-- 		<dependency> -->
+<!--     <groupId>org.danilopianini</groupId> -->
+<!--     <artifactId>java-quadtree</artifactId> -->
+<!--     <version>0.1.2</version> -->
+<!-- </dependency> -->
+		
 		<!-- Entity-Component-System -->
 <!-- 		<dependency> -->
 <!-- 			<groupId>com.badlogicgames.ashley</groupId> -->

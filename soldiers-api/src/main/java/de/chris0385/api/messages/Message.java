@@ -6,16 +6,17 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 
-@JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, include = As.PROPERTY, property = "type")
+@JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME, include = As.EXISTING_PROPERTY, property = "type")
 @JsonSubTypes({ //
 		@JsonSubTypes.Type(value = WorldUpdateMessage.class, name = WorldUpdateMessage.ID), //
+		@JsonSubTypes.Type(value = InfoMessage.class, name = InfoMessage.ID), //
 })
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public abstract class Message {
 	
 
 	@JsonProperty("type")
-	public abstract String getMessageType();
+	public abstract MessageType getMessageType();
 	
 	protected Message() {
 	}

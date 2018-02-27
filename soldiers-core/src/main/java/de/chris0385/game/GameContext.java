@@ -1,14 +1,12 @@
 package de.chris0385.game;
 
-import java.util.function.IntConsumer;
-
 import com.github.antag99.retinazer.Engine;
 import com.github.antag99.retinazer.EngineConfig;
-import com.github.antag99.retinazer.FamilyConfig;
 import com.github.antag99.retinazer.Priority;
 
 import de.chris0385.api.model.Id;
-import de.chris0385.components.LocationComponent;
+import de.chris0385.game.map.SpatialIndex;
+import de.chris0385.game.map.SpatialIndexImpl;
 import de.chris0385.systems.BuildSystem;
 import de.chris0385.systems.KillSystem;
 
@@ -26,8 +24,12 @@ public class GameContext {
 	
 	public GameContext() {
 		EngineConfig config = new EngineConfig();
-		config.addSystem(new KillSystem(), Priority.LOWER);
+
+		// Fight
+		// Move
+		// Conquest
 		config.addSystem(new BuildSystem(this), Priority.DEFAULT);
+		config.addSystem(new KillSystem(), Priority.LOWER);
 		engine = new Engine(config);
 		
 		entityFactory = new EntityFactory(engine);
