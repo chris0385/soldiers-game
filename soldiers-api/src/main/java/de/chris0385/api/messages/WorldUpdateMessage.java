@@ -6,8 +6,8 @@ public final class WorldUpdateMessage extends Message {
 	public static final String ID = "UPDATE";
 
 	@Override
-	public String getMessageType() {
-		return ID;
+	public MessageType getMessageType() {
+		return MessageType.UPDATE;
 	}
 
 	public World world;

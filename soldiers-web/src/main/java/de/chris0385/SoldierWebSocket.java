@@ -21,6 +21,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import de.chris0385.api.commands.Command;
+import de.chris0385.api.messages.InfoMessage;
 import de.chris0385.api.messages.Message;
 import de.chris0385.api.messages.WorldUpdateMessage;
 import de.chris0385.api.model.World;
@@ -40,16 +41,18 @@ public class SoldierWebSocket {
 	private ObjectMapper mapper = new ObjectMapper();
 	
 	private final Lobby lobby;
-	private ConcurrentHashMap<Session, Client> clients = new ConcurrentHashMap<>();
+	private ConcurrentHashMap<Session, ClientHandler> clients = new ConcurrentHashMap<>();
 	
 	/**
 	 * Sends the response
 	 */
-	private class ClientCallback implements ClientUpdateListener {
+	private class ClientHandler implements ClientUpdateListener {
 		private final Session session;
+		private final Client client;
 
-		public ClientCallback(Session session) {
+		public ClientHandler(Session session, Client client) {
 			this.session = session;
+			this.client = client;
 		}
 		
 		private void sendMessage(String message) {
@@ -96,22 +99,35 @@ public class SoldierWebSocket {
 	
 	@OnWebSocketMessage
 	public void onText(Session session, String message) {
+		ClientHandler client = getClient(session) ;
 		try {
 			LOG.debug("Message received:" + message + " thread: " + Thread.currentThread());
 			List<Command> commands = mapper.readValue(message, TYPE_LIST_OF_COMMAND);
-			Client client = getClient(session);
-			client.setCommands(commands);
+			if (client == null) {
+				LOG.error("No client in map for session");
+				return;
+			}
+			for (Command c : commands) {
+				// FIXME: temporary for test , remove loop
+				if (c == null) {
+					client.sendMessage(new InfoMessage("Null Command not accepted"));
+					return;
+				}
+			}
+			client.client.setCommands(commands);
 		} catch (JsonParseException | JsonMappingException e) {
 			// TODO: signal to client
 			LOG.debug("JSon exception when receiving message from client", e);
+			client.sendMessage(new InfoMessage(e.getMessage()));
 		} catch (IOException e) {
 			LOG.warn("IOException when receiving message from client", e);
 		} catch (RuntimeException e) {
+			client.sendMessage(new InfoMessage(e.getMessage()));
 			LOG.error("Unexpected error when processing message from client", e);
 		}
 	}
 
-	private Client getClient(Session session) {
+	private ClientHandler getClient(Session session) {
 		return clients.get(session);
 	}
 
@@ -121,15 +137,16 @@ public class SoldierWebSocket {
 		
 		LOG.info(session.getRemoteAddress().getHostString() + " connected!");
 		Client client = lobby.createClient();
-		clients.put(session, client);
-		client.addClientUpdateListener(new ClientCallback(session));
+		ClientHandler handler = new ClientHandler(session, client);
+		clients.put(session, handler);
+		client.addClientUpdateListener(handler);
 		// session.getPolicy().
 	}
 
 	@OnWebSocketClose
 	public void onClose(Session session, int status, String reason) {
 		LOG.info(session.getRemoteAddress().getHostString() + " closed!");
-		getClient(session).dispose();
+		getClient(session).client.dispose();
 		clients.remove(session);
 	}
 

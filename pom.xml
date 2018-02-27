@@ -42,9 +42,10 @@
 			
 			<!-- Opengl -->
 			<dependency>
+			<!-- 1.9.5 and later has java9 which is incompatible to jetty -->
 				<groupId>org.joml</groupId>
 				<artifactId>joml</artifactId>
-				<version>1.9.8</version>
+				<version>1.9.4</version>
 			</dependency>
 			
 			

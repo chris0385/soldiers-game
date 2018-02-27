@@ -9,7 +9,7 @@ public final class BuildCommand extends CommandOnObject {
 		// Default for deserialisation
 	}
 	
-	protected BuildCommand(Id objectId) {
+	public BuildCommand(Id objectId) {
 		super(objectId);
 	}
 	
