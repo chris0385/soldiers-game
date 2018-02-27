@@ -21,7 +21,7 @@ public abstract class Command {
 	
 
 	@JsonProperty("cmd")
-	public abstract String getCommandName();
+	public abstract CommandType getCommandName();
 	
 	protected Command() {
 	}

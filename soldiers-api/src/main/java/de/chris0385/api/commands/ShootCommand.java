@@ -20,8 +20,8 @@ public final class ShootCommand extends CommandOnObject {
 	}
 
 	@Override
-	public String getCommandName() {
-		return ID;
+	public CommandType getCommandName() {
+		return CommandType.SHOOT;
 	}
 	
 	private final Unit targetUnit;

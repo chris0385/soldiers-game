@@ -6,8 +6,8 @@ public final class LoginCommand extends Command {
 	public static final String ID = "LOGIN";
 	
 	@Override
-	public String getCommandName() {
-		return ID;
+	public CommandType getCommandName() {
+		return CommandType.LOGIN;
 	}
 
 	@JsonProperty(required = true)

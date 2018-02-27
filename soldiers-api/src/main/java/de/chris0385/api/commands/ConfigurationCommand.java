@@ -10,8 +10,8 @@ public final class ConfigurationCommand extends Command {
 	public static final String ID = "CONFIG";
 
 	@Override
-	public String getCommandName() {
-		return ID;
+	public CommandType getCommandName() {
+		return CommandType.CONFIG;
 	}
 	
 	public enum ConfKey {

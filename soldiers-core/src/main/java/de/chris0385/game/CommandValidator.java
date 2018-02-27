@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import de.chris0385.api.commands.Command;
+import de.chris0385.api.commands.CommandType;
 import de.chris0385.api.commands.MoveCommand;
 import de.chris0385.components.ControllableComponent;
 
@@ -28,11 +29,11 @@ public class CommandValidator {
 		public abstract String isInvalid(Command command, GameContext ctx, GamePlayer player);
 	}
 	
-	private final static Map<String, Checker> FAST_VALUEOF = new HashMap<>();
 	static {
 		// valueOf is slow if the key is not found (because it throws an exception).
-		for (Checker s : Checker.values()) {
-			FAST_VALUEOF.put(s.name(), s);
+		for (CommandType s : CommandType.values()) {
+			// Checks if all values in enum
+			Checker.valueOf(s.name());
 		}
 	}
 	
@@ -44,11 +45,10 @@ public class CommandValidator {
 	}
 
 	public String isInvalid(GamePlayer player, Command command) {
-		String name = command.getCommandName();
-		Checker checker = FAST_VALUEOF.get(name);
-		if (checker == null) {
+		CommandType name = command.getCommandName();
+		if (name == null) {
 			return "Unknown command";
 		}
-		return checker.isInvalid(command, ctx, player);
+		return Checker.valueOf(name.name()).isInvalid(command, ctx, player);
 	}
 }

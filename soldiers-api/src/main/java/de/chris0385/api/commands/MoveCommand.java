@@ -8,8 +8,8 @@ public final class MoveCommand extends CommandOnObject {
 	public static final String ID = "MOVE";
 
 	@Override
-	public String getCommandName() {
-		return ID;
+	public CommandType getCommandName() {
+		return CommandType.MOVE;
 	}
 	
 	private MoveCommand() {
