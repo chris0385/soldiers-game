@@ -41,7 +41,7 @@
 <!-- 		</dependency> -->
 		<dependency>
 			<groupId>org.joml</groupId>
-			<artifactId>joml</artifactId>
+			<artifactId>joml-jdk8</artifactId>
 		</dependency>
 		<!-- indexes -->
 		<dependency>
