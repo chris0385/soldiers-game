@@ -29,7 +29,7 @@ public class TileSymmetryGeneratorTool {
 	}
 
 	public static void main(String[] args) throws Exception {
-		new TileSymmetryGeneratorTool("/home/christophe/workspaces/workspace/soldiers-game/Tiles/symmetric.tmx").run();
+		new TileSymmetryGeneratorTool("src/main/resources/map/map.tmx").run();
 	}
 
 	private void run() throws Exception {
@@ -79,7 +79,11 @@ public class TileSymmetryGeneratorTool {
 			if (!layer.getName().equals(newLayer.getName())) {
 				throw new RuntimeException();
 			}
-			new TileLayerSymmetries((TileLayer) newLayer).doSymmetriesForDiff((TileLayer) layer);
+			if (layer instanceof TileLayer) {
+				new TileLayerSymmetries((TileLayer) newLayer).doSymmetriesForDiff((TileLayer) layer);
+			} else {
+				System.err.println(layer.getClass()+" not yetr supported");
+			}
 		}
 	}
 
@@ -98,6 +102,7 @@ public class TileSymmetryGeneratorTool {
 			tileSet.setSource(new File(tileSet.getSource()).getName());
 		}
 //		w.settings.layerCompressionMethod= null;
+		
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		w.writeMap(map, out);
 		File file = new File(tmp);
