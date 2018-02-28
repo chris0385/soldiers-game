@@ -1,6 +1,29 @@
 // JS format temporär, wegen IDE, um Kommentare rein machen zu können.
 const CONFIG=
-{
+[ 
+	{
+		"name" : "grenadier",
+		"components" : {
+			"health" : {
+				"maxHealth" : 100,
+				"health" : 100
+			},
+			"unit" : {
+				// No default. TODO: properties should be automatically reset to null 
+			},
+			"location": {},
+			"physics": {
+				"curVelocity" : 0
+			},
+			"shooting" : {
+				// TODO
+			},
+		}
+	} 
+]
+
+
+DEPRECATED={
 	"grenadier": {
 		"velocity": 5,
 		"radius": 1,  // Circles? Makes calculations easier (no orientation)

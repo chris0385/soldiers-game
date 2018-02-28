@@ -118,6 +118,17 @@ public class PartitionedObjectPool<T> {
 		return partitionedPool::get;
 	}
 	
+	/**
+	 * @return null if no pool was initialized before using createOrGet
+	 */
+	public static <T> Supplier<ObjectPool<T>> get(Class<T> cls) {
+		PartitionedObjectPool<T> partitionedPool = (PartitionedObjectPool<T>) POOLS.get(cls);
+		if (partitionedPool == null) {
+			return null;
+		}
+		return partitionedPool::get;
+	}
+	
 	public ObjectPool<T> get() {
 		return perThreadPartition.get();
 	}
