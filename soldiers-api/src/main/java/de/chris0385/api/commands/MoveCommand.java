@@ -12,7 +12,7 @@ public final class MoveCommand extends CommandOnObject {
 		return CommandType.MOVE;
 	}
 	
-	private MoveCommand() {
+	public MoveCommand() {
 		// default for deserialization
 		targetPosition = null;
 	}

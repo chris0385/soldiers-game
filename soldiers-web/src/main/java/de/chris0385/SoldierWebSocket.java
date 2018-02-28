@@ -1,6 +1,7 @@
 package de.chris0385;
 
 import java.io.IOException;
+import java.io.Reader;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
@@ -98,7 +99,7 @@ public class SoldierWebSocket {
 	}
 	
 	@OnWebSocketMessage
-	public void onText(Session session, String message) {
+	public void onText(Session session, Reader message) {
 		ClientHandler client = getClient(session) ;
 		try {
 			LOG.debug("Message received:" + message + " thread: " + Thread.currentThread());

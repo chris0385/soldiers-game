@@ -87,6 +87,11 @@
 		    <version>0.17</version>
 		</dependency>
 		
+		<!-- Config loading -->
+				<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
 		<!-- logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>

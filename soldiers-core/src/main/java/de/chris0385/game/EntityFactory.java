@@ -1,19 +1,25 @@
 package de.chris0385.game;
 
+import java.util.List;
+import java.util.function.Supplier;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.github.antag99.retinazer.Component;
 import com.github.antag99.retinazer.Engine;
 import com.github.antag99.retinazer.EntityListener;
 import com.github.antag99.retinazer.EntitySet;
 import com.github.antag99.retinazer.Mapper;
 import com.github.antag99.retinazer.util.IntBag;
 
-import de.chris0385.components.ComponentFactory;
 import de.chris0385.components.HealthComponent;
 import de.chris0385.components.LocationComponent;
 import de.chris0385.components.PhysicsComponent;
 import de.chris0385.components.ShootingComponent;
+import de.chris0385.utils.ObjectPool;
+import de.chris0385.utils.PartitionedObjectPool;
+import de.chris0385.utils.PooledObjectFactory;
 
 public class EntityFactory {
 
@@ -21,31 +27,28 @@ public class EntityFactory {
 	
 	private Engine engine;
 
+	@Deprecated
 	private Mapper<HealthComponent> health;
-	private Mapper<PhysicsComponent> physics;
-	private Mapper<ShootingComponent> shooting;
-	private Mapper<LocationComponent> location;
 	
 	public EntityFactory(Engine engine) {
 		this.engine = engine;
 		health = engine.getMapper(HealthComponent.class);
-		physics = engine.getMapper(PhysicsComponent.class);
-		location = engine.getMapper(LocationComponent.class);
-		shooting = engine.getMapper(ShootingComponent.class);
-		
 		
 		engine.addEntityListener(new EntityListener() {
 
 			@Override
 			public void removed(EntitySet entities) {
 				IntBag indices = entities.getIndices();
-				ComponentFactory componentFactory = ComponentFactory.get();
 				for (int i = 0, n = entities.size(); i < n; i++) {
 					int entity = indices.get(i);
 					
+					// TODO: get list of components from componentFactory
 					HealthComponent hc = health.get(entity);
 					if (hc != null) {
-						componentFactory.hc.returnDisposed(hc);
+						Supplier<ObjectPool<HealthComponent>> pool = PartitionedObjectPool.get(HealthComponent.class);
+						if (pool != null) {
+							pool.get().returnDisposed(hc);
+						}
 					}
 					// TODO: rest of components
 				}
@@ -57,15 +60,26 @@ public class EntityFactory {
 		});
 	}
 
-	public int createSoldier() {
-		ComponentFactory componentFactory = ComponentFactory.get();
-		int entity = engine.createEntity();
-		// TODO: initialize
-		health.add(entity, componentFactory.hc.take());
-		physics.add(entity, componentFactory.pc.take());
-		location.add(entity, componentFactory.lc.take());
-		shooting.add(entity, componentFactory.sc.take());
+	public int createEntity(String entityType) {
+		int entity = engine.createEntity(); // empty entity
+
+		ComponentFactory componentFactory = null; // TODO
+
+		List<String> componentsForEntity = getComponentListFor(entityType);
+		for (int i = 0; i < componentsForEntity.size(); i++) {
+			String componentName = componentsForEntity.get(i);
+			Component component = componentFactory.buildComponent(componentName, entityType);
+			Mapper<Component> mapper = (Mapper<Component>) engine.getMapper(component.getClass());
+			mapper.add(entity, component);
+		}
+
 		return entity;
+	}
+
+	private List<String> getComponentListFor(String entityType) {
+		// TODO Auto-generated method stub
+		// Load from config
+		return null;
 	}
 
 }
